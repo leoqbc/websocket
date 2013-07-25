@@ -44,7 +44,8 @@ JSON;
                 // The sender is not the receiver, send to each client connected
                 echo "Usuario $from->resourceId escreveu: " . $msg;
                 $users = '"qtdlogin":"' . $qtd . '"';
-                $client->send('{ "texto":"Usuario ' . $from->resourceId . ' escreveu: ' . $msg . '", ' . $users);
+                echo '{ "texto":"Usuario ' . $from->resourceId . ' escreveu: ' . $msg . '", ' . $users. '}';
+                $client->send('{ "texto":"Usuario ' . $from->resourceId . ' escreveu: ' . $msg . '", ' . $users. '}');
      #       }
         }
         
@@ -52,19 +53,14 @@ JSON;
     
     public function onClose(ConnectionInterface $conn) 
     {
-        $conn->close();
         $this->clients->detach($conn);
-        echo "Conexao fechada por: id: {$conn->resourceId} \n";
-        $texto = "Conexao fechada por: id: {$conn->resourceId} \n";
+        echo "Conexao fechada por: id: {$conn->resourceId}";
+        $texto = "Conexao fechada por: id: {$conn->resourceId}";
         $qtdlogin = count($this->clients);
         foreach ($this->clients as $client) {
             $json = <<<JSON
-            {
-                "texto":"$texto",
-                "qtdlogin":"$qtdlogin"
-            }
+{"texto":"$texto", "qtdlogin":"$qtdlogin"}
 JSON;
-            echo $json;
             $client->send($json);
         }  
     }
