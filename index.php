@@ -8,7 +8,7 @@
     </head>
     <body>
         <script type="text/javascript">
-            var ws = $.gracefulWebSocket('ws://33.33.33.10:8080');
+            var ws = $.gracefulWebSocket('ws://localhost:8080');
             ws.onmessage = function (msg){
                 var server = eval('('+msg.data+')');
                 $('#message').prepend("<p>"+server.texto+"</p>");
@@ -19,8 +19,7 @@
                 $('#send').click(function() {
                     ws.send($("#txtin").val());
                 });
-            });
-            
+            });    
         </script>
         <div id="message"></div>
         <textarea id="txtin"></textarea>
