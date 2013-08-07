@@ -1,4 +1,4 @@
-websocket
+Websocket
 =========
 
 Projeto teste de Websockets com a biblioteca Ratchet
